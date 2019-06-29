@@ -15,41 +15,31 @@ CSV読み込み：https://qiita.com/motoki1990/items/0274d8bcf1a97fe4a869
 #matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import pandas as pd
-csv_input = pd.read_csv(filepath_or_buffer="./20190626194837.csv" ,
+
+csv_file_name = "20190626194837"
+csv_input = pd.read_csv(filepath_or_buffer="./" + csv_file_name + ".csv" ,
                         encoding = "utf_8", sep=",", engine="python",
                         header = None)
 
-#インプットの項目数（行数＊カラム数）を返す
-#print(csv_input.size)
-#print(csv_input.values)
-#
-#print(len(csv_input))
-#
-#print(len(csv_input.columns))
-#
-#print(csv_input.shape)
-
-#print(csv_input.values[0,0])
-#print(csv_input.values[0,1])
-
-#print(csv_input.iloc[1,:])
+#オフセット行を格納
 offset = []
 offset = csv_input.iloc[1,:]
 
 #print(offset)
-#
+
 #print(csv_input[3:4])
 
 #lenで行数を取得
 #for i in range(len(csv_input)):
+#10行まででテスト
 for i in range(10):
 #    print(csv_input.iloc[i,:]-offset)
     #オフセット値から各計測地を減算して表示
     plt.plot(offset - csv_input.iloc[i,:], marker = "o")
-    plt.ylim([-5,40])
-    plt.title(i)
-    plt.xlabel("X-axis")
-    plt.ylabel("Y-axis")
+    plt.ylim([-5,40])#Y軸の幅を指定
+    plt.title(i)#タイトルをフレーム数にする
+    plt.xlabel("X-axis")#x軸の名前．
+    plt.ylabel("Y-axis")#y軸の名前．力（mN）
 #    plt.show()
     file_name ="{0:03d}".format(i) + '.png'
     plt.savefig(file_name)
