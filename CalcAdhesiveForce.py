@@ -10,9 +10,9 @@ CSV読み込み：https://qiita.com/motoki1990/items/0274d8bcf1a97fe4a869
 
 """
 
-#import numpy as np
-#import matplotlib
-#matplotlib.use('Agg')
+import numpy as np
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import pandas as pd
 
