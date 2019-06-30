@@ -7,10 +7,13 @@ Created on Thu Jun 27 21:02:02 2019
 参考：
 CSV読み込み：https://qiita.com/motoki1990/items/0274d8bcf1a97fe4a869
 データプロット：http://python-remrin.hatenadiary.jp/entry/2017/05/27/114816
+matplotlib.pyplot.savefig：https://matplotlib.org/devdocs/api/_as_gen/matplotlib.pyplot.savefig.html
+ディレクトリの作成：https://www.gesource.jp/programming/python/code/0009.html
 
 """
 
 # import numpy as np
+import os
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
@@ -21,6 +24,11 @@ filepath_name = "./" + csv_file_name + ".csv"
 csv_input = pd.read_csv(filepath_or_buffer= filepath_name ,
                         encoding = "utf_8", sep=",", engine="python",
                         header = None)
+
+
+# グラフ画像を保存するディレクトリの作成
+figure_dir_path = "./" + csv_file_name + "_figures"
+os.mkdir(figure_dir_path)
 
 #オフセット行を格納
 offset = []
@@ -42,7 +50,7 @@ for i in range(10):
     plt.xlabel("X-axis")#x軸の名前．
     plt.ylabel("Y-axis")#y軸の名前．あとで力（mN）にする
     file_name ="{0:03d}".format(i) + '.png' #3桁のレン版の名前をつける
-    plt.savefig(file_name)
+    plt.savefig(figure_dir_path + "/" + file_name)
     plt.figure()
    
 print(len(csv_input))
