@@ -69,7 +69,12 @@ def GenerateFigures():
         plt.figure()
 
     # 計測が終わったら終了メッセージを表示
-    messagebox.showinfo("status", "解析が終わりました．")
+    messagebox.showinfo("status", "グラフの生成が終わりました．")
+
+def PeakAdhesiveForce():
+    # 計測が終わったら終了メッセージを表示
+    messagebox.showinfo("status", "ピーク粘着力の計算が終わりました．")
+
 
 # GUIrootの作成
 root = tk.Tk()
@@ -100,9 +105,13 @@ file1_entry.grid(row=0, column=2)
 frame2 = ttk.Frame(root, padding=(0,5))
 frame2.grid(row=1)
 
-# Startボタンの作成
-start_button = ttk.Button(frame2, text='Start', command=GenerateFigures)
-start_button.pack(side=LEFT)
+# Figureボタンの作成
+figure_button = ttk.Button(frame2, text='Generate Figures', command=GenerateFigures)
+figure_button.pack(side=LEFT)
+
+# Peak Valueボタンの作成
+peak_button = ttk.Button(frame2, text='Calc Peak Value', command=PeakAdhesiveForce)
+peak_button.pack(side=LEFT)
 
 # Cancelボタンの作成
 cancel_button = ttk.Button(frame2, text='Cancel', command=quit)
