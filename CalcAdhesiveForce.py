@@ -10,14 +10,15 @@ CSV読み込み：https://qiita.com/motoki1990/items/0274d8bcf1a97fe4a869
 
 """
 
-import numpy as np
+# import numpy as np
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import pandas as pd
 
 csv_file_name = "20190626194837"
-csv_input = pd.read_csv(filepath_or_buffer="./" + csv_file_name + ".csv" ,
+filepath_name = "./" + csv_file_name + ".csv"
+csv_input = pd.read_csv(filepath_or_buffer= filepath_name ,
                         encoding = "utf_8", sep=",", engine="python",
                         header = None)
 
@@ -39,9 +40,8 @@ for i in range(10):
     plt.ylim([-5,40])#Y軸の幅を指定
     plt.title(i)#タイトルをフレーム数にする
     plt.xlabel("X-axis")#x軸の名前．
-    plt.ylabel("Y-axis")#y軸の名前．力（mN）
-#    plt.show()
-    file_name ="{0:03d}".format(i) + '.png'
+    plt.ylabel("Y-axis")#y軸の名前．あとで力（mN）にする
+    file_name ="{0:03d}".format(i) + '.png' #3桁のレン版の名前をつける
     plt.savefig(file_name)
     plt.figure()
    
