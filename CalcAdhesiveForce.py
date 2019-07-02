@@ -83,9 +83,23 @@ def PeakAdhesiveForce():
     offset = []
     offset = csv_input.iloc[1,1:16]
 
-    # 両端を省略した差分を計算
-    adhesive_force_list = offset - csv_input.iloc[2,1:16]
-    print(adhesive_force_list)
+    global peak_force # peak_forceがglobal変数であることを指示
+
+    #lenで行数を取得
+    # for i in range(len(csv_input)):
+    #100行まででテスト
+    for i in range(100):
+        # 両端を省略した差分を計算
+        adhesive_force_list = offset - csv_input.iloc[i,1:16]
+        # 最大値の表示
+        # print(max(adhesive_force_list))
+        temp_peak_force =max(adhesive_force_list)
+        # 最大値の更新
+        if temp_peak_force > peak_force:
+            peak_force = temp_peak_force
+            # print(peak_force)
+    # ローカル変数を参照してしまいエラーになる
+    # print(peak_force)
 
     # 計測が終わったら終了メッセージを表示
     messagebox.showinfo("status", "ピーク粘着力の計算が終わりました．")
