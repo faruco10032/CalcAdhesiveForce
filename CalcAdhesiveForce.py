@@ -35,6 +35,7 @@ def ClickedFigureButton ():
     # 読み込んだファイルリストのパスをGenerateFigures()に渡していく
     print("ClickedFigureButton")
     # print(file_list)
+    
 
 
 # 粘着力の計算とグラフの生成，保存
