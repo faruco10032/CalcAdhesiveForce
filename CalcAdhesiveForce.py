@@ -18,19 +18,29 @@ from tkinter import filedialog
 from tkinter import messagebox
 
 # GUIの作成
-# 参照ボタンを押したときの動作，選択したファイルの拡張子と絶対パスを取得
+# 参照ボタンを押したときの動作，選択したファイルの絶対パスを取得，ファイルはCSVに指定
 def ClickRefButton():
     fTyp = [("CSVファイル","*.csv")]# 入力ファイルの拡張子を指定，今回はCSV
     iDir = os.path.abspath(os.path.dirname(__file__))# このコードがあるファイルの絶対パスを取得
-    filepath = filedialog.askopenfilename(filetypes = fTyp, initialdir = iDir)# ファイルダイアログを表示
-    file1.set(filepath)# file1に絶対パスをセット
+    # filepath = filedialog.askopenfilename(filetypes = fTyp, initialdir = iDir)# ファイルダイアログを表示
+    filepath = filedialog.askopenfilenames(filetypes = fTyp, initialdir = iDir)# ファイルダイアログを表示し，複数ファイルを選択
+    # file1.set(filepath)# file1に絶対パスをセット
+    # ファイルリストを作成，参照できるようにグローバル変数にする
+    global file_list
+    file_list = list(filepath)
+    
+
+# Figureボタンを押したときの動作
+def ClickedFigureButton ():
+    # 読み込んだファイルリストのパスをGenerateFigures()に渡していく
+    print("ClickedFigureButton")
+    # print(file_list)
 
 
 # 粘着力の計算とグラフの生成，保存
 # 後で別関数に分けたほうがいいかも
 # CSVファイルパスを引数にしたほうがいい？（.set()，.get()を理解しきれていない）
 def GenerateFigures():
-
 
     # csv_file_name = "20190626194837"
     # ファイル名と拡張子を取得する
@@ -119,7 +129,7 @@ frame1 = ttk.Frame(root, padding = 10)
 frame1.grid()
 
 # 参照ボタンの作成
-ref_button = ttk.Button(root, text = u'参照', command = ClickRefButton)
+ref_button = ttk.Button(root, text = u'参照', command = ClickRefButton )
 ref_button.grid(row = 0, column = 3)
 
 # ラベルの作成
@@ -139,7 +149,7 @@ frame2 = ttk.Frame(root, padding=(0,5))
 frame2.grid(row=1)
 
 # Figureボタンの作成
-figure_button = ttk.Button(frame2, text='Generate Figures', command=GenerateFigures)
+figure_button = ttk.Button(frame2, text='Generate Figures', command = ClickedFigureButton )
 figure_button.pack(side=LEFT)
 
 # Peak Valueボタンの作成
