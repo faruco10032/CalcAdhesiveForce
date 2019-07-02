@@ -34,3 +34,7 @@ Pyhton 3.7
 * ファイルダイアログの表示：https://pg-chain.com/python-filedialog
 * ファイルパスの取得：https://note.nkmk.me/python-os-basename-dirname-split-splitext/
 * ファイルパスの取得：https://kaworu.jpn.org/python/Python%E3%81%A7%E3%83%91%E3%82%B9%E3%81%8B%E3%82%89%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E5%90%8D%E3%82%92%E5%8F%96%E5%BE%97%E3%81%99%E3%82%8B
+* リストの最大値計算：https://www.sejuku.net/blog/67901#i-2
+* pandasのilocの使い方：http://ailaby.com/lox_iloc_ix/
+* Pythonのスライスについて：https://qiita.com/tanuk1647/items/276d2be36f5abb8ea52e
+* 
