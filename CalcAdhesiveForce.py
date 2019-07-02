@@ -31,6 +31,7 @@ def ClickRefButton():
 # CSVファイルパスを引数にしたほうがいい？（.set()，.get()を理解しきれていない）
 def GenerateFigures():
 
+
     # csv_file_name = "20190626194837"
     # ファイル名と拡張子を取得する
     csv_file_name, ext = os.path.splitext(os.path.basename(file1.get()))
@@ -83,12 +84,13 @@ def PeakAdhesiveForce():
     offset = []
     offset = csv_input.iloc[1,1:16]
 
-    global peak_force # peak_forceがglobal変数であることを指示
+    # global peak_force # peak_forceがglobal変数であることを指示
+    peak_force = 0 # peak_forceの宣言
 
     #lenで行数を取得
-    # for i in range(len(csv_input)):
+    for i in range(len(csv_input)):
     #100行まででテスト
-    for i in range(100):
+    # for i in range(100):
         # 両端を省略した差分を計算
         adhesive_force_list = offset - csv_input.iloc[i,1:16]
         # 最大値の表示
@@ -98,11 +100,12 @@ def PeakAdhesiveForce():
         if temp_peak_force > peak_force:
             peak_force = temp_peak_force
             # print(peak_force)
-    # ローカル変数を参照してしまいエラーになる
+            
+    # ピーク値の表示
     # print(peak_force)
 
     # 計測が終わったら終了メッセージを表示
-    messagebox.showinfo("status", "ピーク粘着力の計算が終わりました．")
+    messagebox.showinfo("status", "ピーク粘着力の計算が終わりました．\ピーク値は" + "%d" + "です"%(peak_force))
 
 
 # GUIrootの作成
