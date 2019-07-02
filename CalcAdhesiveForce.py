@@ -55,9 +55,9 @@ def GenerateFigures():
     offset = csv_input.iloc[1,:]
 
     #lenで行数を取得
-    # for i in range(len(csv_input)):
+    for i in range(len(csv_input)):
     #10行まででテスト
-    for i in range(10):
+    # for i in range(10):
     #    print(csv_input.iloc[i,:]-offset)
         #オフセット値から各計測地を減算して表示
         plt.plot(offset - csv_input.iloc[i,:], marker = "o")
@@ -86,6 +86,7 @@ def PeakAdhesiveForce():
 
     # global peak_force # peak_forceがglobal変数であることを指示
     peak_force = 0 # peak_forceの宣言
+    peak_flame = 0 # peak_flameの宣言
 
     #lenで行数を取得
     for i in range(len(csv_input)):
@@ -99,13 +100,13 @@ def PeakAdhesiveForce():
         # 最大値の更新
         if temp_peak_force > peak_force:
             peak_force = temp_peak_force
-            # print(peak_force)
+            peak_flame = i
             
     # ピーク値の表示
     # print(peak_force)
 
     # 計測が終わったら終了メッセージを表示
-    messagebox.showinfo("status", "ピーク粘着力の計算が終わりました．\ピーク値は" + "%d" + "です"%(peak_force))
+    messagebox.showinfo("status", "ピーク粘着力の計算が終わりました．\nピーク値は %d\nその時のフレーム番号は %d"%(peak_force, peak_flame))
 
 
 # GUIrootの作成
