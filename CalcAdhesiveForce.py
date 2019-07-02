@@ -71,7 +71,22 @@ def GenerateFigures():
     # 計測が終わったら終了メッセージを表示
     messagebox.showinfo("status", "グラフの生成が終わりました．")
 
+
+# 粘着力のピーク値を計算する
 def PeakAdhesiveForce():
+    # 参照ファイル（file1）を開く
+    csv_input = pd.read_csv(filepath_or_buffer=  file1.get(),
+                        encoding = "utf_8", sep=",", engine="python",
+                        header = None)
+    
+    # 両端を省略したオフセット行を格納
+    offset = []
+    offset = csv_input.iloc[1,1:16]
+
+    # 両端を省略した差分を計算
+    adhesive_force_list = offset - csv_input.iloc[2,1:16]
+    print(adhesive_force_list)
+
     # 計測が終わったら終了メッセージを表示
     messagebox.showinfo("status", "ピーク粘着力の計算が終わりました．")
 
