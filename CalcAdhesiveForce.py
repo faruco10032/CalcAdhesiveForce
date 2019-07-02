@@ -35,30 +35,33 @@ def ClickedFigureButton ():
     # 読み込んだファイルリストのパスをGenerateFigures()に渡していく
     print("ClickedFigureButton")
     # print(file_list)
-    
+    # ファイルパス引き渡しテスト
+    GenerateFigures(file_list[0])
+
 
 
 # 粘着力の計算とグラフの生成，保存
 # 後で別関数に分けたほうがいいかも
 # CSVファイルパスを引数にしたほうがいい？（.set()，.get()を理解しきれていない）
-def GenerateFigures():
+def GenerateFigures(csv_file_path):
 
     # csv_file_name = "20190626194837"
     # ファイル名と拡張子を取得する
-    csv_file_name, ext = os.path.splitext(os.path.basename(file1.get()))
+    # csv_file_name, ext = os.path.splitext(os.path.basename(file1.get()))
+    csv_file_name, ext = os.path.splitext(os.path.basename(csv_file_path)
 
-    # filepath_name = "./" + csv_file_name + ".csv"
-    # csv_input = pd.read_csv(filepath_or_buffer= filepath_name ,
+    # # 参照ファイル（file1）を開く
+    # csv_input = pd.read_csv(filepath_or_buffer=  file1.get(),
     #                     encoding = "utf_8", sep=",", engine="python",
     #                     header = None)
-    # 参照ファイル（file1）を開く
-    csv_input = pd.read_csv(filepath_or_buffer=  file1.get(),
+    # 引数ファイルパスを開く
+    csv_input = pd.read_csv(filepath_or_buffer = str (csv_file_path),
                         encoding = "utf_8", sep=",", engine="python",
                         header = None)
 
     # グラフ画像を保存するディレクトリの作成（参照ファイルと同一階層内に作る）
     # figure_dir_path = "./" + csv_file_name + "_figures"
-    figure_dir_path = os.path.dirname(file1.get()) + "/" + csv_file_name + "_figures"
+    figure_dir_path = os.path.dirname(csv_file_path) + "/" + csv_file_name + "_figures"
     os.mkdir(figure_dir_path)
 
     #オフセット行を格納
