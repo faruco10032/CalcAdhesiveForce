@@ -102,11 +102,9 @@ def ClickedPeakButton ():
         # print(PeakAdhesiveForce (path))
         # 要素を追加
         peak_list.append( PeakAdhesiveForce (path) )
-    # ピーク値とそのフレームを表示
-    print(peak_list)
 
     # 計測が終わったら終了メッセージを表示
-    messagebox.showinfo("status", "ピーク値の計算が終わりました．")
+    messagebox.showinfo("status", "ピーク値の計算が終わりました．{}".format(peak_list))
 
 
 # 粘着力のピーク値を計算する
