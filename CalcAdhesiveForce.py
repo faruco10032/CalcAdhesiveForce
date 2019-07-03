@@ -86,7 +86,7 @@ def ClickedPeakButton ():
 
 # 粘着力のピーク値を計算する
 def PeakAdhesiveForce(_path):
-    # 参照ファイル（file1）を開く
+    # 参照ファイルパスを開く
     csv_input = pd.read_csv(filepath_or_buffer=  _path,
                         encoding = "utf_8", sep=",", engine="python",
                         header = None)
@@ -115,6 +115,18 @@ def PeakAdhesiveForce(_path):
 
     # ピーク値とフレーム番号を返す
     return (peak_force, peak_flame)
+
+def ClickedAverageButton():
+    sum_df = pd.DataFrame() # 加算用データフレーム
+    # 選択データを読み込む
+    for path in file_list:
+        # 参照ファイルパスを開く，入力データはリストにする
+        csv_input = pd.read_csv(filepath_or_buffer=  path, encoding = "utf_8", sep=",", engine="python", header = None)
+        # sum_df += csv_input
+    print(sum_df)
+    
+
+    messagebox.showinfo("info","入力データの平均値が計算できました")
 
 # Resetボタンを押したときの挙動
 def ClickedResetButton():
@@ -153,19 +165,23 @@ frame2 = ttk.Frame(root, padding=(0,5))
 frame2.grid(row=1)
 
 # Figureボタンの作成
-figure_button = ttk.Button(frame2, text='Generate Figures', command = ClickedFigureButton )
+figure_button = ttk.Button(frame2, text='Figures', command = ClickedFigureButton )
 figure_button.pack(side=LEFT)
 
 # Peak Valueボタンの作成
-peak_button = ttk.Button(frame2, text='Calc Peak Value', command=ClickedPeakButton)
+peak_button = ttk.Button(frame2, text='Peak Value', command = ClickedPeakButton)
 peak_button.pack(side=LEFT)
 
+# Averageボタンの作成
+average_button = ttk.Button(frame2, text='Average', command = ClickedAverageButton)
+average_button.pack(side=LEFT)
+
 # Cancelボタンの作成
-cancel_button = ttk.Button(frame2, text='Cancel', command=quit)
+cancel_button = ttk.Button(frame2, text='Cancel', command = quit)
 cancel_button.pack(side=LEFT)
 
 # Resetボタンの作成
-reset_button = ttk.Button(frame2, text='Reset', command=ClickedResetButton)
+reset_button = ttk.Button(frame2, text='Reset', command = ClickedResetButton)
 reset_button.pack(side=LEFT)
 
 root.mainloop()
