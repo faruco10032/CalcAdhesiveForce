@@ -22,19 +22,10 @@ from tkinter import messagebox
 def ClickRefButton():
     fTyp = [("CSVファイル","*.csv")]# 入力ファイルの拡張子を指定，今回はCSV
     iDir = os.path.abspath(os.path.dirname(__file__))# このコードがあるファイルの絶対パスを取得
-    # filepath = filedialog.askopenfilename(filetypes = fTyp, initialdir = iDir)# ファイルダイアログを表示
     filepath = filedialog.askopenfilenames(filetypes = fTyp, initialdir = iDir)# ファイルダイアログを表示し，複数ファイルを選択
-    # file1.set(filepath)# file1に絶対パスをセット
     # # ファイルリストを作成，参照できるようにグローバル変数にする
     global file_list
     file_list = list(filepath)
-    # ファイルリストを作成，setを使ってみる
-    # file_list.set(filepath)
-    # getに対して要素を指定できるか
-    # print(file1.get())
-    # set, getは辞書型{'key1': 'val1', 'key2': 'val2', 'key3': 'val3'}
-    # 数字の指定で要素を抜き出せるか
-    # print(file_list.get(2))
     
 
 # Figureボタンを押したときの動作
@@ -49,27 +40,14 @@ def ClickedFigureButton ():
 
 # 粘着力の計算とグラフの生成，保存
 def GenerateFigures(_path):
-
-    # print("_Path")
-    # print(_path)
-
-    # # csv_file_name = "20190626194837"
-    # # ファイル名と拡張子を取得する
-    # # csv_file_name, ext = os.path.splitext(os.path.basename(file1.get()))
+    # ファイルパスからファイルの名前を取得
     csv_file_name, ext = os.path.splitext(os.path.basename(_path))
-    # csv_file_name, ext = os.path.splitext(os.path.basename("./sample_data_20190626194837.csv")
-
-    # # # 参照ファイル（file1）を開く
-    # # csv_input = pd.read_csv(filepath_or_buffer=  file1.get(),
-    # #                     encoding = "utf_8", sep=",", engine="python",
-    # #                     header = None)
     # 引数ファイルパスを開く
     csv_input = pd.read_csv(filepath_or_buffer = _path,
                         encoding = "utf_8", sep=",", engine="python",
                         header = None)
 
     # グラフ画像を保存するディレクトリの作成（参照ファイルと同一階層内に作る）
-    # figure_dir_path = "./" + csv_file_name + "_figures"
     figure_dir_path = os.path.dirname(_path) + "/" + csv_file_name + "_figures"
     os.mkdir(figure_dir_path)
 
@@ -99,7 +77,6 @@ def ClickedPeakButton ():
     peak_list = []
     # 読み込んだファイルリストのパスをPeakAdhesiveForce()に渡していく
     for path in file_list:
-        # print(PeakAdhesiveForce (path))
         # 要素を追加
         peak_list.append( PeakAdhesiveForce (path) )
 
@@ -135,14 +112,15 @@ def PeakAdhesiveForce(_path):
         if temp_peak_force > peak_force:
             peak_force = temp_peak_force
             peak_flame = i
-            
-    # ピーク値の表示
-    # print(peak_force)
-    # ピーク値を返す
+
+    # ピーク値とフレーム番号を返す
     return (peak_force, peak_flame)
 
-    # 計測が終わったら終了メッセージを表示
-    # messagebox.showinfo("status", "ピーク粘着力の計算が終わりました．\nピーク値は %d\nその時のフレーム番号は %d"%(peak_force, peak_flame))
+# Resetボタンを押したときの挙動
+def ClickedResetButton():
+    file_list = 0
+    print(file_list)
+    messagebox.showinfo("reset","ファイルパスをリセットしました")
 
 
 # GUIrootの作成
@@ -165,11 +143,6 @@ s.set('ファイル>>')
 label1 = ttk.Label(frame1, textvariable=s)
 label1.grid(row=0, column=0)
 
-# # 参照ファイルパス表示ラベルの作成
-# file1 = StringVar()
-# file1_entry = ttk.Entry(frame1, textvariable=file1, width=50)
-# file1_entry.grid(row=0, column=2)
-
 # 参照ファイルパス表示ラベルの作成
 file_list = StringVar()
 file_list_entry = ttk.Entry(frame1, textvariable=file_list, width=50)
@@ -190,5 +163,9 @@ peak_button.pack(side=LEFT)
 # Cancelボタンの作成
 cancel_button = ttk.Button(frame2, text='Cancel', command=quit)
 cancel_button.pack(side=LEFT)
+
+# Resetボタンの作成
+reset_button = ttk.Button(frame2, text='Reset', command=ClickedResetButton)
+reset_button.pack(side=LEFT)
 
 root.mainloop()
